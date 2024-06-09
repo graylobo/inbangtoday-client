@@ -1,11 +1,18 @@
-import AppTheme from "@/layout/global-provider/AppTheme";
-import StyleRegistry from "@/layout/global-provider/StyleRegistry";
-import React, { PropsWithChildren } from "react";
+"use client";
 
+import AppTheme from "@/layout/global-provider/AppTheme";
+import Dashboard from "@/layout/global-provider/DashBoard";
+import StyleRegistry from "@/layout/global-provider/StyleRegistry";
+import { GlobalStyle } from "@/styles";
+import "antd/dist/reset.css";
+import { PropsWithChildren } from "react";
 function GlobalLayout({ children }: PropsWithChildren) {
   return (
     <StyleRegistry>
-      <AppTheme>{children}</AppTheme>
+      <GlobalStyle />
+      <AppTheme>
+        <Dashboard>{children}</Dashboard>
+      </AppTheme>
     </StyleRegistry>
   );
 }

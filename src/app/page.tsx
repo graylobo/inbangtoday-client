@@ -1,10 +1,3 @@
-import Dashboard from "@/components/Menu";
-import Image from "next/image";
-
 export default function Home() {
-  return (
-    <main>
-      <Dashboard />
-    </main>
-  );
+  return <main></main>;
 }

@@ -1,16 +1,14 @@
-"use client";
-import { GlobalStyle } from "@/styles";
-import { ReactNode } from "react";
-import "antd/dist/reset.css";
+import { ConfigProvider } from "antd";
+import { ThemeProvider } from "antd-style";
+import React, { ReactNode } from "react";
 export interface AppThemeProps {
   children?: ReactNode;
 }
 function AppTheme({ children }: AppThemeProps) {
   return (
-    <div>
-      <GlobalStyle />
-      {children}
-    </div>
+    <ThemeProvider>
+      <ConfigProvider>{children}</ConfigProvider>
+    </ThemeProvider>
   );
 }
 
