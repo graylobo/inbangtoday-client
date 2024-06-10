@@ -1,36 +1,21 @@
-import { create } from "zustand";
+import { UserState, initialState } from "@/store/user/initialState";
+import {
+  UserSettingsAction,
+  createUserSettingsAction,
+} from "@/store/user/slices/settings/action";
+import { StateCreator, create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
+import { shallow } from "zustand/shallow";
+import { createWithEqualityFn } from "zustand/traditional";
 
-interface UserState {
-  count: number;
-  age: number;
-  increment: () => void;
-  ageIncrement: () => void;
-}
+export type UserStore = UserState & UserSettingsAction;
 
-// export const useUserStore = create<UserState>((set) => ({
-//   count: 0,
-//   age: 0,
-//   increment: () => set((state) => ({ count: state.count + 1 })),
-//   ageIncrement: () => set((state) => ({ age: state.age + 1 })),
-// }));
+const createStore: StateCreator<UserStore> = (get, set) => ({
+  ...initialState,
+  ...createUserSettingsAction(get, set),
+});
 
-// useUserStore.subscribe((state) => {
-//     console.log('Count changed to', state.count);
-//   });
-
-export const useUserStore = create<UserState>()(
-  subscribeWithSelector((set) => ({
-    count: 0,
-    age: 0,
-    increment: () => set((state: any) => ({ count: state.count + 1 })),
-    ageIncrement: () => set((state: any) => ({ age: state.age + 1 })),
-  }))
-);
-
-useUserStore.subscribe(
-  (state) => state.count,
-  (count) => {
-    console.log("Count changed to", count);
-  }
+export const useUserStore = createWithEqualityFn<UserStore>()(
+  subscribeWithSelector(createStore),
+  shallow
 );

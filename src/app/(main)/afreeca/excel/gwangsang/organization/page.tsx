@@ -3,22 +3,13 @@ import { useUserStore } from "@/store/user/store";
 import React from "react";
 
 function Page() {
-  const { count, increment, age, ageIncrement } = useUserStore();
+  const switchThemeMode = useUserStore((state) => state?.switchThemeMode);
+
   return (
     <div>
-      광상
-      <div>카운트:{count}</div>
       <button
         onClick={() => {
-          increment();
-        }}
-      >
-        클릭
-      </button>
-      <div>카운트:{age}</div>
-      <button
-        onClick={() => {
-          ageIncrement();
+          switchThemeMode("light");
         }}
       >
         클릭
