@@ -1,3 +1,4 @@
+import { createDevtools } from "@/store/middleware/createDevtools";
 import { UserState, initialState } from "@/store/user/initialState";
 import {
   UserSettingsAction,
@@ -15,7 +16,9 @@ const createStore: StateCreator<UserStore> = (get, set) => ({
   ...createUserSettingsAction(get, set),
 });
 
+const devtools = createDevtools("user");
+
 export const useUserStore = createWithEqualityFn<UserStore>()(
-  subscribeWithSelector(createStore),
+  subscribeWithSelector(devtools(createStore)),
   shallow
 );

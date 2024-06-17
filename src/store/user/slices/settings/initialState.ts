@@ -9,5 +9,5 @@ export interface UserSettingsState {
 
 export const initialSettingsState: UserSettingsState = {
   defaultSettings: DEFAULT_SETTINGS,
-  settings: DEFAULT_SETTINGS,
+  settings: {},
 };

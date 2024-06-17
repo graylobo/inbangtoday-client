@@ -16,7 +16,7 @@ export const createUserSettingsAction = (set, get) => ({
     if (isEqual(prevSetting, nextSettings)) return;
 
     const diffs = difference(nextSettings, defaultSettings);
-    set({ settings: diffs }, false, "optimistic_updateSettings");
+    set({ settings: diffs }, false, "createUserSettingsAction");
   },
 
   setCommonConfig: async (common) => {

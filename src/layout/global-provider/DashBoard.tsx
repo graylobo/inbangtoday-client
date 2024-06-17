@@ -1,6 +1,7 @@
 "use client";
 
 import { menuList } from "@/const/menu-list";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Button, Layout, Menu, theme } from "antd";
@@ -42,6 +43,7 @@ export interface DashboardProps {
 
 function Dashboard({ children }: DashboardProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const [broken, setBroken] = useState(false);
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -54,11 +56,17 @@ function Dashboard({ children }: DashboardProps) {
   return (
     <Layout>
       <Sider
-        trigger={null}
         collapsible
         collapsed={collapsed}
-        width={300}
-        theme="light"
+        breakpoint="lg"
+        onBreakpoint={(broken) => {
+          setBroken(broken);
+          if (broken) {
+            setCollapsed(true);
+          }
+        }}
+        trigger={null}
+        collapsedWidth={broken ? 0 : 80}
       >
         <div className="demo-logo-vertical" />
         <Menu
