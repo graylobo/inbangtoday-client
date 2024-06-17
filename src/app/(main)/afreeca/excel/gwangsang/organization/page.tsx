@@ -1,4 +1,5 @@
 "use client";
+import { Organization } from "@/components/Organization";
 import { useUserStore } from "@/store/user/store";
 import React from "react";
 
@@ -7,6 +8,7 @@ function Page() {
 
   return (
     <div>
+      <Organization />
       <button
         onClick={() => {
           switchThemeMode("light");
